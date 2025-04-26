@@ -15,12 +15,14 @@
 	"workspaceFolder": "/workspaces/langchain",
 
 	// Prevent the container from shutting down
-	"overrideCommand": true
+	"overrideCommand": true,
 
 	// Features to add to the dev container. More info: https://containers.dev/features
-	// "features": {
-	// 	"ghcr.io/devcontainers-contrib/features/poetry:2": {}
-	// }
+	"features": {		
+		"ghcr.io/devcontainers/features/node:1": {},
+		"ghcr.io/devcontainers/features/python:1": {},
+		"ghcr.io/va-h/devcontainers-features/uv:1": {}
+	}
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
@@ -32,5 +34,5 @@
 	// "customizations": {},
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+	// "remoteUser": "root",
 }
