@@ -1,31 +1,29 @@
 # Streamlit
 
-> **[Streamlit](https://streamlit.io/) is a faster way to build and share data apps.**
-> Streamlit turns data scripts into shareable web apps in minutes. All in pure Python. No front‑end experience required.
-> See more examples at [streamlit.io/generative-ai](https://streamlit.io/generative-ai).
+> **[Streamlit](https://streamlit.io/) 是一种更快地构建和分享数据应用的方式。**
+> Streamlit 可以在几分钟内将数据脚本转变为可共享的网络应用。完全使用纯 Python。无需前端经验。
+> 在 [streamlit.io/generative-ai](https://streamlit.io/generative-ai) 查看更多示例。
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/langchain-ai/streamlit-agent?quickstart=1)
+[![在 GitHub Codespaces 中打开](https://github.com/codespaces/badge.svg)](https://codespaces.new/langchain-ai/streamlit-agent?quickstart=1)
 
-In this guide we will demonstrate how to use `StreamlitCallbackHandler` to display the thoughts and actions of an agent in an
-interactive Streamlit app. Try it out with the running app below using the MRKL agent:
+在本指南中，我们将演示如何使用 `StreamlitCallbackHandler` 在交互式 Streamlit 应用中显示代理的思考和行动。通过下方运行的应用使用 MRKL 代理来体验它：
 
 <iframe loading="lazy" src="https://langchain-mrkl.streamlit.app/?embed=true&embed_options=light_theme"
     style={{ width: 100 + '%', border: 'none', marginBottom: 1 + 'rem', height: 600 }}
     allow="camera;clipboard-read;clipboard-write;"
 ></iframe>
 
-## Installation and Setup
+## 安装和设置
 
 ```bash
 pip install langchain streamlit
 ```
 
-You can run `streamlit hello` to load a sample app and validate your install succeeded. See full instructions in Streamlit's
-[Getting started documentation](https://docs.streamlit.io/library/get-started).
+您可以运行 `streamlit hello` 来加载示例应用并验证您的安装是否成功。完整说明请参见 Streamlit 的[入门文档](https://docs.streamlit.io/library/get-started)。
 
-## Display thoughts and actions
+## 显示思考和行动
 
-To create a `StreamlitCallbackHandler`, you just need to provide a parent container to render the output.
+要创建 `StreamlitCallbackHandler`，您只需提供一个用于渲染输出的父容器。
 
 ```python
 from langchain_community.callbacks.streamlit import (
@@ -36,14 +34,11 @@ import streamlit as st
 st_callback = StreamlitCallbackHandler(st.container())
 ```
 
-Additional keyword arguments to customize the display behavior are described in the
-[API reference](https://python.langchain.com/api_reference/langchain/callbacks/langchain.callbacks.streamlit.streamlit_callback_handler.StreamlitCallbackHandler.html).
+自定义显示行为的其他关键字参数在[API 参考](https://python.langchain.com/api_reference/langchain/callbacks/langchain.callbacks.streamlit.streamlit_callback_handler.StreamlitCallbackHandler.html)中有描述。
 
-### Scenario 1: Using an Agent with Tools
+### 场景 1：使用带工具的代理
 
-The primary supported use case today is visualizing the actions of an Agent with Tools (or Agent Executor). You can create an
-agent in your Streamlit app and simply pass the `StreamlitCallbackHandler` to `agent.run()` in order to visualize the
-thoughts and actions live in your app.
+目前主要支持的用例是可视化带工具代理（或代理执行器）的行动。您可以在 Streamlit 应用中创建一个代理，只需将 `StreamlitCallbackHandler` 传递给 `agent.run()` 即可在应用中实时可视化思考和行动。
 
 ```python
 import streamlit as st
@@ -67,14 +62,12 @@ if prompt := st.chat_input():
         st.write(response["output"])
 ```
 
-**Note:** You will need to set `OPENAI_API_KEY` for the above app code to run successfully.
-The easiest way to do this is via [Streamlit secrets.toml](https://docs.streamlit.io/library/advanced-features/secrets-management),
-or any other local ENV management tool.
+**注意：** 您需要设置 `OPENAI_API_KEY` 才能成功运行上述应用代码。
+最简单的方法是通过 [Streamlit secrets.toml](https://docs.streamlit.io/library/advanced-features/secrets-management)，
+或任何其他本地环境变量管理工具。
 
-### Additional scenarios
+### 其他场景
 
-Currently `StreamlitCallbackHandler` is geared towards use with a LangChain Agent Executor. Support for additional agent types,
-use directly with Chains, etc will be added in the future.
+目前 `StreamlitCallbackHandler` 主要针对与 LangChain 代理执行器一起使用。未来将添加对额外代理类型、直接与链一起使用等的支持。
 
-You may also be interested in using
-[StreamlitChatMessageHistory](/docs/integrations/memory/streamlit_chat_message_history) for LangChain.
+您可能还对使用 [StreamlitChatMessageHistory](/docs/integrations/memory/streamlit_chat_message_history) 与 LangChain 一起使用感兴趣。

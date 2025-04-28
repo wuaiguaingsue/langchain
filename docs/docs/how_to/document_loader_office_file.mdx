@@ -1,23 +1,22 @@
-# How to load Microsoft Office files
+# 如何加载Microsoft Office文件
 
-The [Microsoft Office](https://www.office.com/) suite of productivity software includes Microsoft Word, Microsoft Excel, Microsoft PowerPoint, Microsoft Outlook, and Microsoft OneNote. It is available for Microsoft Windows and macOS operating systems. It is also available on Android and iOS.
+[Microsoft Office](https://www.office.com/)生产力软件套件包括Microsoft Word、Microsoft Excel、Microsoft PowerPoint、Microsoft Outlook和Microsoft OneNote。它适用于Microsoft Windows和macOS操作系统。它也可用于Android和iOS。
 
-This covers how to load commonly used file formats including `DOCX`, `XLSX` and `PPTX` documents into a LangChain 
+本文介绍如何将常用文件格式（包括`DOCX`、`XLSX`和`PPTX`文档）加载到LangChain的
 [Document](https://python.langchain.com/api_reference/core/documents/langchain_core.documents.base.Document.html#langchain_core.documents.base.Document)
-object that we can use downstream.
+对象中，以便我们可以在下游使用。
 
 
-## Loading DOCX, XLSX, PPTX with AzureAIDocumentIntelligenceLoader
+## 使用AzureAIDocumentIntelligenceLoader加载DOCX、XLSX、PPTX
 
-[Azure AI Document Intelligence](https://aka.ms/doc-intelligence) (formerly known as `Azure Form Recognizer`) is machine-learning 
-based service that extracts texts (including handwriting), tables, document structures (e.g., titles, section headings, etc.) and key-value-pairs from
-digital or scanned PDFs, images, Office and HTML files. Document Intelligence supports `PDF`, `JPEG/JPG`, `PNG`, `BMP`, `TIFF`, `HEIF`, `DOCX`, `XLSX`, `PPTX` and `HTML`.
+[Azure AI Document Intelligence](https://aka.ms/doc-intelligence)（前身为`Azure Form Recognizer`）是基于机器学习的服务，可从
+数字或扫描的PDF、图像、Office和HTML文件中提取文本（包括手写内容）、表格、文档结构（例如，标题、章节标题等）和键值对。Document Intelligence支持`PDF`、`JPEG/JPG`、`PNG`、`BMP`、`TIFF`、`HEIF`、`DOCX`、`XLSX`、`PPTX`和`HTML`。
 
-This [current implementation](https://aka.ms/di-langchain) of a loader using `Document Intelligence` can incorporate content page-wise and turn it into LangChain documents. The default output format is markdown, which can be easily chained with `MarkdownHeaderTextSplitter` for semantic document chunking. You can also use `mode="single"` or `mode="page"` to return pure texts in a single page or document split by page.
+使用`Document Intelligence`的[当前实现](https://aka.ms/di-langchain)的加载器可以按页面整合内容并将其转换为LangChain文档。默认输出格式为markdown，可以很容易地与`MarkdownHeaderTextSplitter`链接，用于语义文档分块。您也可以使用`mode="single"`或`mode="page"`返回单页中的纯文本或按页分割的文档。
 
-### Prerequisite
+### 先决条件
 
-An Azure AI Document Intelligence resource in one of the 3 preview regions: **East US**, **West US2**, **West Europe** - follow [this document](https://learn.microsoft.com/azure/ai-services/document-intelligence/create-document-intelligence-resource?view=doc-intel-4.0.0) to create one if you don't have. You will be passing `<endpoint>` and `<key>` as parameters to the loader.
+在以下3个预览区域之一中的Azure AI Document Intelligence资源：**东美**、**西美2**、**西欧** - 如果您没有，请按照[此文档](https://learn.microsoft.com/azure/ai-services/document-intelligence/create-document-intelligence-resource?view=doc-intel-4.0.0)创建一个。您将把`<endpoint>`和`<key>`作为参数传递给加载器。
 
 ```python
 %pip install --upgrade --quiet  langchain langchain-community azure-ai-documentintelligence

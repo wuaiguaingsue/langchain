@@ -2,14 +2,13 @@
 sidebar_position: 2
 ---
 
-# How to install LangChain packages
+# 如何安装LangChain软件包
 
-The LangChain ecosystem is split into different packages, which allow you to choose exactly which pieces of
-functionality to install.
+LangChain生态系统被分成不同的软件包，让您可以精确选择要安装的功能部分。
 
-## Official release
+## 官方发布版本
 
-To install the main `langchain` package, run:
+要安装主要的`langchain`软件包，请运行：
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -24,95 +23,92 @@ import CodeBlock from "@theme/CodeBlock";
   </TabItem>
 </Tabs>
 
-While this package acts as a sane starting point to using LangChain,
-much of the value of LangChain comes when integrating it with various model providers, datastores, etc.
-By default, the dependencies needed to do that are NOT installed. You will need to install the dependencies for specific integrations separately, which we show below.
+虽然这个软件包作为使用LangChain的合理起点，但LangChain的大部分价值来自于将其与各种模型提供商、数据存储等集成时。
+默认情况下，实现这些集成所需的依赖项并未安装。您需要单独安装特定集成的依赖项，我们将在下面展示这些内容。
 
-## Ecosystem packages
+## 生态系统软件包
 
-With the exception of the `langsmith` SDK, all packages in the LangChain ecosystem depend on `langchain-core`, which contains base
-classes and abstractions that other packages use. The dependency graph below shows how the different packages are related.
-A directed arrow indicates that the source package depends on the target package:
+除`langsmith` SDK外，LangChain生态系统中的所有软件包都依赖于`langchain-core`，其中包含其他软件包使用的基类和抽象。
+下面的依赖关系图显示了不同软件包之间的关系。有向箭头表示源软件包依赖于目标软件包：
 
 ![](/img/ecosystem_packages.png)
 
-When installing a package, you do not need to explicitly install that package's explicit dependencies (such as `langchain-core`).
-However, you may choose to if you are using a feature only available in a certain version of that dependency.
-If you do, you should make sure that the installed or pinned version is compatible with any other integration packages you use.
+安装软件包时，您不需要显式安装该软件包的直接依赖项（如`langchain-core`）。
+但是，如果您使用的功能仅在该依赖项的特定版本中可用，您可以选择安装。
+如果这样做，您应确保安装或固定的版本与您使用的任何其他集成软件包兼容。
 
-### LangChain core
-The `langchain-core` package contains base abstractions that the rest of the LangChain ecosystem uses, along with the LangChain Expression Language. It is automatically installed by `langchain`, but can also be used separately. Install with:
+### LangChain核心
+`langchain-core`软件包包含LangChain生态系统使用的基础抽象，以及LangChain表达式语言。它会由`langchain`自动安装，但也可以单独使用。安装方法：
 
 ```bash
 pip install langchain-core
 ```
 
-### Integration packages
+### 集成软件包
 
-Certain integrations like OpenAI and Anthropic have their own packages.
-Any integrations that require their own package will be documented as such in the [Integration docs](/docs/integrations/providers/).
-You can see a list of all integration packages in the [API reference](https://python.langchain.com/api_reference/) under the "Partner libs" dropdown.
-To install one of these run:
+某些集成如OpenAI和Anthropic有自己的软件包。
+任何需要自己软件包的集成都将在[集成文档](/docs/integrations/providers/)中有所说明。
+您可以在[API参考](https://python.langchain.com/api_reference/)的"Partner libs"下拉菜单中看到所有集成软件包的列表。
+要安装其中一个，请运行：
 
 ```bash
 pip install langchain-openai
 ```
 
-Any integrations that haven't been split out into their own packages will live in the `langchain-community` package. Install with:
+任何尚未分离到自己软件包中的集成将位于`langchain-community`软件包中。安装方法：
 
 ```bash
 pip install langchain-community
 ```
 
-### LangChain experimental
-The `langchain-experimental` package holds experimental LangChain code, intended for research and experimental uses.
-Install with:
+### LangChain实验版
+`langchain-experimental`软件包包含实验性的LangChain代码，用于研究和实验目的。
+安装方法：
 
 ```bash
 pip install langchain-experimental
 ```
 
 ### LangGraph
-`langgraph` is a library for building stateful, multi-actor applications with LLMs. It integrates smoothly with LangChain, but can be used without it.
-Install with:
+`langgraph`是一个用于构建有状态、多角色LLM应用程序的库。它与LangChain无缝集成，但也可以独立使用。
+安装方法：
 
 ```bash
 pip install langgraph
 ```
 
 ### LangServe
-LangServe helps developers deploy LangChain runnables and chains as a REST API.
-LangServe is automatically installed by LangChain CLI.
-If not using LangChain CLI, install with:
+LangServe帮助开发者将LangChain可运行组件和链部署为REST API。
+LangServe会由LangChain CLI自动安装。
+如果不使用LangChain CLI，安装方法：
 
 ```bash
 pip install "langserve[all]"
 ```
-for both client and server dependencies. Or `pip install "langserve[client]"` for client code, and `pip install "langserve[server]"` for server code.
+这会同时安装客户端和服务器依赖项。或者`pip install "langserve[client]"`仅安装客户端代码，`pip install "langserve[server]"`仅安装服务器代码。
 
 ### LangChain CLI
-The LangChain CLI is useful for working with LangChain templates and other LangServe projects.
-Install with:
+LangChain CLI对于使用LangChain模板和其他LangServe项目很有用。
+安装方法：
 
 ```bash
 pip install langchain-cli
 ```
 
 ### LangSmith SDK
-The LangSmith SDK is automatically installed by LangChain. However, it does not depend on
-`langchain-core`, and can be installed and used independently if desired.
-If you are not using LangChain, you can install it with:
+LangSmith SDK会由LangChain自动安装。但是，它不依赖于`langchain-core`，如果需要，可以单独安装和使用。
+如果您不使用LangChain，可以通过以下方式安装：
 
 ```bash
 pip install langsmith
 ```
 
-### From source
+### 从源代码安装
 
-If you want to install a package from source, you can do so by cloning the [main LangChain repo](https://github.com/langchain-ai/langchain), enter the directory of the package you want to install `PATH/TO/REPO/langchain/libs/{package}`, and run:
+如果您想从源代码安装软件包，可以克隆[LangChain主仓库](https://github.com/langchain-ai/langchain)，进入要安装的软件包目录`PATH/TO/REPO/langchain/libs/{package}`，然后运行：
 
 ```bash
 pip install -e .
 ```
 
-LangGraph, LangSmith SDK, and certain integration packages live outside the main LangChain repo. You can see [all repos here](https://github.com/langchain-ai).
+LangGraph、LangSmith SDK和某些集成软件包位于LangChain主仓库之外。您可以在[这里查看所有仓库](https://github.com/langchain-ai)。

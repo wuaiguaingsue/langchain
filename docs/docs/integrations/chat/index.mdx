@@ -4,14 +4,14 @@ sidebar_class_name: hidden
 keywords: [compatibility]
 ---
 
-# Chat models
+# 聊天模型
 
-[Chat models](/docs/concepts/chat_models) are language models that use a sequence of [messages](/docs/concepts/messages) as inputs and return messages as outputs (as opposed to using plain text). These are generally newer models.
+[聊天模型](/docs/concepts/chat_models)是使用一系列[消息](/docs/concepts/messages)作为输入并返回消息作为输出的语言模型（与使用纯文本不同）。这些通常是较新的模型。
 
 :::info
 
-If you'd like to write your own chat model, see [this how-to](/docs/how_to/custom_chat_model/).
-If you'd like to contribute an integration, see [Contributing integrations](/docs/contributing/how_to/integrations/).
+如果您想编写自己的聊天模型，请参阅[此操作指南](/docs/how_to/custom_chat_model/)。
+如果您想贡献一个集成，请参阅[贡献集成](/docs/contributing/how_to/integrations/)。
 
 :::
 
@@ -23,18 +23,18 @@ import ChatModelTabs from "@theme/ChatModelTabs";
 model.invoke("Hello, world!")
 ```
 
-## Featured Providers
+## 特色提供商
 
 :::info
-While all these LangChain classes support the indicated advanced feature, you may have
-to open the provider-specific documentation to learn which hosted models or backends support
-the feature.
+虽然所有这些 LangChain 类都支持指定的高级功能，但您可能需要
+查阅提供商特定的文档，以了解哪些托管模型或后端支持
+该功能。
 :::
 
 import { CategoryTable, IndexTable } from "@theme/FeatureTables";
 
 <CategoryTable category="chat" />
 
-## All chat models
+## 所有聊天模型
 
 <IndexTable />

@@ -1,22 +1,22 @@
 # LLMonitor
 
->[LLMonitor](https://llmonitor.com?utm_source=langchain&utm_medium=py&utm_campaign=docs) is an open-source observability platform that provides cost and usage analytics, user tracking, tracing and evaluation tools.
+>[LLMonitor](https://llmonitor.com?utm_source=langchain&utm_medium=py&utm_campaign=docs) 是一个开源的可观测性平台，提供成本和使用分析、用户跟踪、追踪和评估工具。
 
 <video controls width='100%' >
   <source src='https://llmonitor.com/videos/demo-annotated.mp4'/>
 </video>
 
-## Setup
+## 设置
 
-Create an account on [llmonitor.com](https://llmonitor.com?utm_source=langchain&utm_medium=py&utm_campaign=docs), then copy your new app's `tracking id`.
+在 [llmonitor.com](https://llmonitor.com?utm_source=langchain&utm_medium=py&utm_campaign=docs) 创建一个账户，然后复制您的新应用的 `tracking id`。
 
-Once you have it, set it as an environment variable by running:
+获得后，通过运行以下命令将其设置为环境变量：
 
 ```bash
 export LLMONITOR_APP_ID="..."
 ```
 
-If you'd prefer not to set an environment variable, you can pass the key directly when initializing the callback handler:
+如果您不想设置环境变量，可以在初始化回调处理程序时直接传递密钥：
 
 ```python
 from langchain_community.callbacks.llmonitor_callback import LLMonitorCallbackHandler
@@ -24,7 +24,7 @@ from langchain_community.callbacks.llmonitor_callback import LLMonitorCallbackHa
 handler = LLMonitorCallbackHandler(app_id="...")
 ```
 
-## Usage with LLM/Chat models
+## 与LLM/聊天模型一起使用
 
 ```python
 from langchain_openai import OpenAI
@@ -38,17 +38,17 @@ llm = OpenAI(
 
 chat = ChatOpenAI(callbacks=[handler])
 
-llm("Tell me a joke")
+llm("讲个笑话")
 
 ```
 
-## Usage with chains and agents
+## 与链和代理一起使用
 
-Make sure to pass the callback handler to the `run` method so that all related chains and llm calls are correctly tracked.
+确保将回调处理程序传递给 `run` 方法，以便正确跟踪所有相关链和llm调用。
 
-It is also recommended to pass `agent_name` in the metadata to be able to distinguish between agents in the dashboard.
+还建议在元数据中传递 `agent_name`，以便能够区分仪表板中的不同代理。
 
-Example:
+示例：
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -62,25 +62,25 @@ handler = LLMonitorCallbackHandler()
 
 @tool
 def get_word_length(word: str) -> int:
-    """Returns the length of a word."""
+    """返回单词的长度。"""
     return len(word)
 
 tools = [get_word_length]
 
 prompt = OpenAIFunctionsAgent.create_prompt(
     system_message=SystemMessage(
-        content="You are very powerful assistant, but bad at calculating lengths of words."
+        content="你是一个非常强大的助手，但在计算单词长度方面很糟糕。"
     )
 )
 
 agent = OpenAIFunctionsAgent(llm=llm, tools=tools, prompt=prompt, verbose=True)
 agent_executor = AgentExecutor(
-    agent=agent, tools=tools, verbose=True, metadata={"agent_name": "WordCount"}  # <- recommended, assign a custom name
+    agent=agent, tools=tools, verbose=True, metadata={"agent_name": "WordCount"}  # <- 推荐，指定一个自定义名称
 )
-agent_executor.run("how many letters in the word educa?", callbacks=[handler])
+agent_executor.run("'educa'这个单词有多少个字母？", callbacks=[handler])
 ```
 
-Another example:
+另一个示例：
 
 ```python
 from langchain.agents import load_tools, initialize_agent, AgentType
@@ -92,26 +92,26 @@ handler = LLMonitorCallbackHandler()
 
 llm = OpenAI(temperature=0)
 tools = load_tools(["serpapi", "llm-math"], llm=llm)
-agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, metadata={ "agent_name": "GirlfriendAgeFinder" })  # <- recommended, assign a custom name
+agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, metadata={ "agent_name": "GirlfriendAgeFinder" })  # <- 推荐，指定一个自定义名称
 
 agent.run(
-    "Who is Leo DiCaprio's girlfriend? What is her current age raised to the 0.43 power?",
+    "莱昂纳多·迪卡普里奥的女友是谁？她当前的年龄的0.43次方是多少？",
     callbacks=[handler],
 )
 ```
 
-## User Tracking
-User tracking allows you to identify your users, track their cost, conversations and more.
+## 用户跟踪
+用户跟踪允许您识别用户，跟踪他们的成本、对话等。
 
 ```python
 from langchain_community.callbacks.llmonitor_callback import LLMonitorCallbackHandler, identify
 
 with identify("user-123"):
-    llm.invoke("Tell me a joke")
+    llm.invoke("讲个笑话")
 
 with identify("user-456", user_props={"email": "user456@test.com"}):
-    agent.run("Who is Leo DiCaprio's girlfriend?")
+    agent.run("莱昂纳多·迪卡普里奥的女友是谁？")
 ```
-## Support
+## 支持
 
-For any question or issue with integration you can reach out to the LLMonitor team on [Discord](http://discord.com/invite/8PafSG58kK) or via [email](mailto:vince@llmonitor.com).
+如果您有任何关于集成的问题或问题，可以通过 [Discord](http://discord.com/invite/8PafSG58kK) 或 [电子邮件](mailto:vince@llmonitor.com) 联系 LLMonitor 团队。

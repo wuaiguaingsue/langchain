@@ -1,21 +1,20 @@
 ---
 sidebar_position: 3
 ---
-# How to use toolkits
+# 如何使用工具包
 
+工具包是为特定任务设计的一组工具的集合。它们提供了方便的加载方法。
 
-Toolkits are collections of tools that are designed to be used together for specific tasks. They have convenient loading methods.
-
-All Toolkits expose a `get_tools` method which returns a list of tools.
-You can therefore do:
+所有工具包都公开了一个 `get_tools` 方法，该方法返回一个工具列表。
+因此，您可以执行以下操作：
 
 ```python
-# Initialize a toolkit
+# 初始化工具包
 toolkit = ExampleTookit(...)
 
-# Get list of tools
+# 获取工具列表
 tools = toolkit.get_tools()
 
-# Create agent
+# 创建代理
 agent = create_agent_method(llm, tools, prompt)
 ```

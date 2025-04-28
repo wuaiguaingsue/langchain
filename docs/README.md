@@ -1,3 +1,3 @@
-# LangChain Documentation
+# LangChain文档
 
-For more information on contributing to our documentation, see the [Documentation Contributing Guide](https://python.langchain.com/docs/contributing/how_to/documentation)
+有关如何为我们的文档做贡献的更多信息，请参阅[文档贡献指南](https://python.langchain.com/docs/contributing/how_to/documentation)
